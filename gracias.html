@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>¡Pago exitoso! — the branding bestie</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cobalto: #2540E0;
+      --amarillo: #FFCB3C;
+      --tinta: #181613;
+      --crema: #F7F2EA;
+      --blanco: #FFFFFF;
+      --gris: #8C857A;
+      --secundario: #6B655B;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--crema);
+      color: var(--tinta);
+      font-family: 'Hanken Grotesk', system-ui, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .logo {
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 900;
+      font-size: 20px;
+      color: var(--cobalto);
+      text-decoration: none;
+      margin-bottom: 48px;
+    }
+    .logo em { font-style: italic; font-weight: 400; }
+
+    .card {
+      background: var(--blanco);
+      border-radius: 24px;
+      padding: 56px 48px;
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 16px 40px rgba(24,22,19,0.10);
+    }
+
+    .check-circle {
+      width: 72px;
+      height: 72px;
+      background: var(--amarillo);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 28px;
+    }
+
+    .eyebrow {
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cobalto);
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 900;
+      font-size: 38px;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      color: var(--tinta);
+      margin-bottom: 16px;
+    }
+    h1 em { font-style: italic; font-weight: 400; color: var(--cobalto); }
+
+    .desc {
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--secundario);
+      margin-bottom: 36px;
+    }
+    .desc strong { color: var(--tinta); }
+
+    .btn {
+      display: inline-block;
+      background: var(--cobalto);
+      color: var(--blanco);
+      font-family: 'Hanken Grotesk', system-ui, sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      padding: 16px 36px;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: background 150ms;
+      cursor: pointer;
+    }
+    .btn:hover { background: #2138C4; }
+
+    .note {
+      margin-top: 20px;
+      font-size: 13px;
+      color: var(--gris);
+    }
+
+    @media (max-width: 540px) {
+      .card { padding: 40px 24px; }
+      h1 { font-size: 30px; }
+    }
+  </style>
+</head>
+<body>
+
+  <a class="logo" href="index.html">the branding <em>bestie</em></a>
+
+  <div class="card">
+    <div class="check-circle">
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none"
+           stroke="#2540E0" stroke-width="2.5"
+           stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"/>
+      </svg>
+    </div>
+
+    <div class="eyebrow">Pago confirmado</div>
+    <h1>¡Lo hiciste, <em>bestie</em>!</h1>
+    <p class="desc">
+      Tu acceso a <strong>Aterriza tu marca</strong> ya está activo.
+      Haz clic abajo para empezar tu primer módulo ahora mismo.
+    </p>
+
+    <a href="curso-marca.html" class="btn">Ir al curso →</a>
+    <p class="note">También recibirás un correo de confirmación de Stripe.</p>
+  </div>
+
+  <script>
+    // Stripe redirige aquí con ?session_id=cs_xxxx
+    // Lo guardamos en localStorage para proteger el acceso al curso.
+    const params = new URLSearchParams(window.location.search);
+    const sessionId = params.get('session_id');
+
+    if (sessionId) {
+      localStorage.setItem('bb_access_marca', JSON.stringify({
+        course: 'marca',
+        sessionId: sessionId,
+        ts: Date.now()
+      }));
+    }
+  </script>
+
+</body>
+</html>
